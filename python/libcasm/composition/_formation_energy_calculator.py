@@ -132,16 +132,16 @@ class FormationEnergyCalculator:
                     f"with shape ({self.independent_compositions},)"
                 )
         else:
-            if energy.shape != (self.independent_compositions,):
-                raise ValueError(
-                    "If energy is an array, "
-                    f"it must have shape ({self.independent_compositions},)"
-                )
             if composition.shape[0] != self.independent_compositions:
                 raise ValueError(
-                    "If energy is an array,"
+                    "If energy is an array, "
                     "composition must be a 2d array with shape "
                     f"({self.independent_compositions}, n)"
+                )
+            if energy.shape != (composition.shape[1],):
+                raise ValueError(
+                    "If energy is an array, "
+                    f"it must have shape (n,)"
                 )
         return energy - self.reference_energy(composition)
 
